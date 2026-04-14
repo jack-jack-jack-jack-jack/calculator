@@ -1,8 +1,8 @@
-let num1= 1
-let num2 = 1 
-let op = "+"
+let num1= null
+let num2 = null
+let op = null
 
-const calculate = (a,b,op) => {
+const operate = (a,b,op) => {
     switch(op) {
         case "+":
             return a + b
