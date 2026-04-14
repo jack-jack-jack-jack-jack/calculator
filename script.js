@@ -1,6 +1,18 @@
+let num1= 1
+let num2 = 1 
+let op = "+"
 
-const add = (a,b) => a + b
-const subtract = (a,b) => a - b
-const multiply = (a,b) => a * b
-const divide = (a,b) => a / b
+const calculate = (a,b,op) => {
+    switch(op) {
+        case "+":
+            return a + b
+        case "-":
+            return a - b
+        case "*":
+            return a * b
+        case "/":
+            return a / b
+    }
+}
+
 
