@@ -14,5 +14,13 @@ const operate = (a,b,op) => {
             return a / b
     }
 }
+const currentScreen = document.querySelector(".currentScreen")
+const btns = document.querySelectorAll("button")
+btns.forEach(btn => {
+    btn.addEventListener("click", () => {
+        currentScreen.textContent += btn.textContent
+        })
+    })
+
 
 
