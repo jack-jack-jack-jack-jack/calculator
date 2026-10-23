@@ -1,3 +1,7 @@
+const btns
+
+
+
 const operate = (num1, num2, op) => {
     switch(op){
         case "+":
@@ -11,4 +15,3 @@ const operate = (num1, num2, op) => {
     }
 }
 
-console.log(operate(1,2,"-") )
