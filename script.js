@@ -1,5 +1,7 @@
-const btns
-
+const btns = document.querySelectorAll("button")
+btns.forEach(btn => btn.addEventListener("click", e =>{
+    alert("button clicked")
+}))
 
 
 const operate = (num1, num2, op) => {
