@@ -4,28 +4,34 @@ let op = null;
 
 const current = document.querySelector(".screen-btm");
 const previous = document.querySelector(".screen-top");
+const btns = document.querySelectorAll("button");
 
 const operate = (num1, num2, op) => {
+    if ((op === "/" || op === "%") && num2 === 0) {
+        alert("Nice try. You can't divide by zero!");
+        return null;
+    }
+
     switch (op) {
         case "+":
             return num1 + num2;
         case "-":
             return num1 - num2;
         case "/":
+        case "%":
             return num1 / num2;
         case "*":
+        case "x":
             return num1 * num2;
-        case "%":
-            return num1 % num2;
     }
 };
 
-const btns = document.querySelectorAll("button");
 btns.forEach(btn => btn.addEventListener("click", () => {
     switch (btn.dataset.type) {
         case "number":
             if (previous.textContent.includes("=")) {
                 current.textContent = btn.textContent;
+                previous.textContent = "";
                 num1 = null;
                 num2 = null;
                 op = null;
@@ -41,11 +47,18 @@ btns.forEach(btn => btn.addEventListener("click", () => {
                 num1 = Number(current.textContent);
             } else {
                 num2 = Number(current.textContent);
-                num1 = operate(num1, num2, op);
+                const result = operate(num1, num2, op);
+
+                if (result === null) break;
+
+                num1 = result;
             }
-            
-            op = btn.textContent;
-            previous.textContent = `${num1} ${op}`;
+
+            op = btn.textContent === "%" ? "/" :
+                 btn.textContent === "x" ? "*" :
+                 btn.textContent;
+
+            previous.textContent = `${num1} ${btn.textContent}`;
             current.textContent = "0";
             break;
 
@@ -65,8 +78,13 @@ btns.forEach(btn => btn.addEventListener("click", () => {
             if (num1 !== null && op !== null) {
                 num2 = Number(current.textContent);
                 const result = operate(num1, num2, op);
-                previous.textContent = `${num1} ${op} ${num2} =`;
-                current.textContent = String(result);
+
+                if (result !== null) {
+                    const roundedResult = Number(result.toFixed(8));
+                    previous.textContent = `${num1} ${op} ${num2} =`;
+                    current.textContent = String(roundedResult);
+                }
+
                 num1 = null;
                 num2 = null;
                 op = null;
@@ -86,4 +104,5 @@ btns.forEach(btn => btn.addEventListener("click", () => {
                 current.textContent += ".";
             }
             break;
-}}));
+    }
+}));
